@@ -90,7 +90,7 @@ const About = () => {
                 style={{ background: "var(--bg-secondary)" }}
               >
                 <img
-                  src="/profile.jpg"
+                  src="https://media.licdn.com/dms/image/v2/D5603AQE6Z4Mele2DKw/profile-displayphoto-scale_400_400/B56ZxHSP4nIYAg-/0/1770722513809?e=1775692800&v=beta&t=0nYTs01iKumlyc3qn5F5iLF3lMXG9GJOQY8BdLGMnds"
                   alt="Nithish Kumar Sirigadde"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
