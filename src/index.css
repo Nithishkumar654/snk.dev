@@ -1,0 +1,508 @@
+/* ═══════════════════════════════════════════
+   PORTFOLIO V2 — index.css
+   4 Themes: Ocean · Space · Forest · Solar
+   ═══════════════════════════════════════════ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary, #0f0f0f); }
+::-webkit-scrollbar-thumb { background: var(--accent, #60a5fa); border-radius: 3px; }
+
+/* ══════════════════════════════════
+   THEME CSS VARIABLES
+   Set via data-theme on <html>
+══════════════════════════════════ */
+
+/* ── OCEAN DEEP ── */
+[data-theme="ocean"] {
+  --bg-primary:    #020d1a;
+  --bg-secondary:  #041526;
+  --bg-card:       rgba(4,30,55,.65);
+  --border-card:   rgba(0,180,220,.18);
+  --border-hover:  rgba(0,210,230,.6);
+  --accent:        #00c9d4;
+  --accent-bright: #00ffe0;
+  --accent-muted:  #0097a7;
+  --accent-dim:    rgba(0,200,220,.1);
+  --text-primary:  #cceeff;
+  --text-secondary:rgba(180,230,255,.65);
+  --text-muted:    rgba(120,190,220,.4);
+  --pill-bg:       rgba(0,40,80,.5);
+  --pill-border:   rgba(0,180,220,.25);
+  --nav-bg:        rgba(2,13,26,.82);
+  --font-display:  'DM Serif Display', Georgia, serif;
+  --font-body:     'Nunito', sans-serif;
+  --glow:          0 0 28px rgba(0,201,212,.4), 0 0 56px rgba(0,255,224,.12);
+  --section-alt:   rgba(0,20,40,.35);
+}
+
+/* ── SOLAR SYSTEM ── */
+[data-theme="space"] {
+  --bg-primary:    #030008;
+  --bg-secondary:  #08001a;
+  --bg-card:       rgba(15,5,40,.72);
+  --border-card:   rgba(140,80,255,.22);
+  --border-hover:  rgba(168,85,247,.65);
+  --accent:        #a855f7;
+  --accent-bright: #e040fb;
+  --accent-muted:  #7c3aed;
+  --accent-dim:    rgba(168,85,247,.1);
+  --text-primary:  #e8d8ff;
+  --text-secondary:rgba(200,170,255,.65);
+  --text-muted:    rgba(150,110,220,.4);
+  --pill-bg:       rgba(20,5,50,.6);
+  --pill-border:   rgba(140,80,255,.22);
+  --nav-bg:        rgba(3,0,8,.85);
+  --font-display:  'Exo 2', sans-serif;
+  --font-body:     'Nunito', sans-serif;
+  --glow:          0 0 28px rgba(168,85,247,.45), 0 0 56px rgba(224,64,251,.15);
+  --section-alt:   rgba(10,0,30,.4);
+}
+
+/* ── DEEP FOREST ── */
+[data-theme="forest"] {
+  --bg-primary:    #030c04;
+  --bg-secondary:  #071408;
+  --bg-card:       rgba(5,25,8,.7);
+  --border-card:   rgba(74,222,128,.2);
+  --border-hover:  rgba(74,222,128,.6);
+  --accent:        #4ade80;
+  --accent-bright: #86efac;
+  --accent-muted:  #16a34a;
+  --accent-dim:    rgba(74,222,128,.1);
+  --text-primary:  #d4f5d8;
+  --text-secondary:rgba(180,240,190,.65);
+  --text-muted:    rgba(100,190,120,.4);
+  --pill-bg:       rgba(5,30,8,.55);
+  --pill-border:   rgba(74,222,128,.22);
+  --nav-bg:        rgba(3,10,4,.85);
+  --font-display:  'Lora', Georgia, serif;
+  --font-body:     'Nunito', sans-serif;
+  --glow:          0 0 28px rgba(74,222,128,.38), 0 0 56px rgba(134,239,172,.12);
+  --section-alt:   rgba(0,15,4,.4);
+}
+
+/* ── SOLAR FLARE ── */
+[data-theme="solar"] {
+  --bg-primary:    #0a0500;
+  --bg-secondary:  #150a00;
+  --bg-card:       rgba(30,12,0,.72);
+  --border-card:   rgba(255,140,0,.2);
+  --border-hover:  rgba(249,115,22,.65);
+  --accent:        #f97316;
+  --accent-bright: #fbbf24;
+  --accent-muted:  #ea580c;
+  --accent-dim:    rgba(249,115,22,.1);
+  --text-primary:  #ffe8c8;
+  --text-secondary:rgba(255,220,160,.65);
+  --text-muted:    rgba(210,150,60,.4);
+  --pill-bg:       rgba(30,10,0,.55);
+  --pill-border:   rgba(255,140,0,.22);
+  --nav-bg:        rgba(10,5,0,.85);
+  --font-display:  'Cinzel', Georgia, serif;
+  --font-body:     'Nunito', sans-serif;
+  --glow:          0 0 28px rgba(249,115,22,.45), 0 0 56px rgba(251,191,36,.18);
+  --section-alt:   rgba(20,8,0,.4);
+}
+
+/* ══════════════════════════════════
+   GLOBAL BASE
+══════════════════════════════════ */
+html {
+  background: #020d1a; /* fallback before theme loads */
+  min-height: 100vh;
+}
+
+body {
+  background-color: transparent; /* html handles bg so canvas shows through */
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: color .7s ease;
+  min-height: 100vh;
+}
+
+/* html background changes with theme */
+[data-theme="ocean"] { background-color: #020d1a; }
+[data-theme="space"]  { background-color: #030008; }
+[data-theme="forest"] { background-color: #030c04; }
+[data-theme="solar"]  { background-color: #0a0500; }
+
+/* ── TYPOGRAPHY SCALE ── */
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem);  line-height: 1.05; font-weight: 700; }
+h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.1;  font-weight: 700; }
+h3 { font-size: clamp(1.2rem, 2.2vw, 1.55rem); line-height: 1.2; font-weight: 600; }
+h4 { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.3; font-weight: 600; }
+p  { font-size: clamp(.9rem, 1.3vw, 1.05rem); line-height: 1.75; }
+
+.font-display { font-family: var(--font-display) !important; }
+.font-body    { font-family: var(--font-body) !important; }
+
+/* ── CANVAS — fixed behind everything ── */
+#bg-canvas {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  display: block;
+}
+
+/* ── MAIN CONTENT — sits above canvas, transparent so canvas shows ── */
+#main-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* ── SECTIONS with subtle overlay tint ── */
+.section-alt {
+  background: var(--section-alt) !important;
+  backdrop-filter: none;
+}
+
+/* ── GLASS ── */
+.glass {
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+/* ── GRADIENT TEXT ── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent-bright));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── THEME CARD ── */
+.theme-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background .9s, border-color .9s, transform .25s, box-shadow .25s;
+}
+.theme-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--glow);
+}
+
+/* ── THEME PILL ── */
+.theme-pill {
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: .8rem;
+  letter-spacing: .08em;
+  padding: .3rem .85rem;
+  transition: all .9s;
+}
+.theme-pill:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── NAV ── */
+.navbar {
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border-card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: background .9s, border-color .9s;
+}
+.nav-link {
+  font-family: var(--font-body);
+  font-size: .95rem;
+  letter-spacing: .06em;
+  color: var(--text-secondary);
+  position: relative;
+  transition: color .25s;
+}
+.nav-link::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 2px; background: var(--accent);
+  transform: scaleX(0); transition: transform .3s;
+}
+.nav-link:hover  { color: var(--accent); }
+.nav-link:hover::after { transform: scaleX(1); }
+.nav-link.active { color: var(--accent); }
+.nav-link.active::after { transform: scaleX(1); }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: var(--font-body);
+  font-size: .75rem;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex; align-items: center; gap: .75rem;
+  margin-bottom: .5rem;
+}
+.section-label::after {
+  content: ''; flex: 1; max-width: 80px;
+  height: 1px; background: var(--border-card);
+}
+
+/* ── SECTION HEADING ── */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--text-primary);
+  transition: font-family .9s, color .9s;
+}
+.section-heading .hl { color: var(--accent); font-style: italic; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  font-family: var(--font-body);
+  font-size: .95rem;
+  letter-spacing: .1em;
+  padding: .9rem 2.2rem;
+  border: 1px solid var(--accent);
+  background: var(--accent-dim);
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: border-color .3s, color .3s;
+  border-radius: 2px;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--accent); opacity: .12;
+  transform: translateX(-100%); transition: transform .4s;
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover { border-color: var(--accent-bright); color: var(--accent); }
+
+.btn-secondary {
+  font-family: var(--font-body);
+  font-size: .95rem;
+  letter-spacing: .1em;
+  padding: .9rem 2.2rem;
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: border-color .3s, color .3s;
+  border-radius: 2px;
+}
+.btn-secondary::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--accent); opacity: .08;
+  transform: translateX(-100%); transition: transform .4s;
+}
+.btn-secondary:hover::before { transform: translateX(0); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── SKILL CHIP ── */
+.skill-chip {
+  font-family: var(--font-body);
+  font-size: .78rem;
+  padding: .28rem .85rem;
+  border: 1px solid var(--pill-border);
+  background: var(--pill-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: color .25s, border-color .25s, background .9s;
+  border-radius: 9999px;
+}
+.skill-chip::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--accent); opacity: .1;
+  transform: translateY(100%); transition: transform .3s;
+}
+.skill-chip:hover::before { transform: translateY(0); }
+.skill-chip:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── PROJECT CARD ── */
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  position: relative; overflow: hidden;
+  cursor: pointer;
+  transition: background .9s, border-color .3s, transform .25s, box-shadow .25s;
+  border-radius: 1rem;
+}
+.project-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--glow); }
+.project-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: translateX(-100%); opacity: 0;
+  animation: scanLine 3s linear infinite;
+}
+.project-card:hover::after { opacity: 1; }
+
+/* ── INPUT ── */
+.theme-input {
+  width: 100%; background: transparent;
+  border: none; border-bottom: 1px solid var(--border-card);
+  padding: .75rem 0; font-family: var(--font-body);
+  font-size: 1rem; color: var(--text-primary);
+  outline: none; transition: border-color .3s;
+}
+.theme-input::placeholder { color: var(--text-muted); }
+.theme-input:focus { border-color: var(--accent); }
+
+/* ── STAT CARD ── */
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  padding: 1.1rem 1.25rem; position: relative; overflow: hidden;
+  transition: background .9s, border-color .3s, transform .25s, box-shadow .25s;
+  border-radius: .75rem;
+}
+.stat-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: var(--glow); }
+.stat-glow-orb {
+  position: absolute; width: 90px; height: 90px; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  top: -30px; right: -30px; opacity: .07; transition: opacity .3s;
+  pointer-events: none;
+}
+.stat-card:hover .stat-glow-orb { opacity: .2; }
+
+/* ── ACHIEVEMENT CARD ── */
+.achievement-card {
+  background: var(--bg-card); border: 1px solid var(--border-card);
+  padding: 1rem 1.25rem; position: relative; overflow: hidden;
+  transition: background .9s, border-color .3s, transform .25s;
+  border-radius: .75rem;
+}
+.achievement-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 3px; height: 0;
+  background: var(--accent); transition: height .4s;
+}
+.achievement-card:hover::before { height: 100%; }
+.achievement-card:hover { border-color: var(--border-hover); transform: translateX(4px); }
+
+/* ── EXPERIENCE CARD ── */
+.exp-card {
+  background: var(--bg-card); border: 1px solid var(--border-card);
+  padding: 1.25rem 1.5rem; border-radius: .75rem;
+  transition: background .9s, border-color .3s, box-shadow .3s;
+}
+.exp-card:hover { border-color: var(--border-hover); box-shadow: var(--glow); }
+
+/* ── CONTACT CARD ── */
+.contact-method {
+  background: var(--bg-card); border: 1px solid var(--border-card);
+  border-radius: .75rem; padding: 1.5rem;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  transition: background .9s, border-color .3s, transform .25s, box-shadow .25s;
+}
+.contact-method:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--glow); }
+
+/* ── TIMELINE ── */
+.timeline-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  flex-shrink: 0; margin-top: 6px;
+  transition: box-shadow .3s;
+}
+.timeline-item:hover .timeline-dot { box-shadow: 0 0 16px var(--accent), 0 0 32px var(--accent-bright); }
+
+/* ── THEME SWITCHER FAB ── */
+.theme-switcher { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; }
+.theme-fab {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid var(--border-card);
+  background: var(--nav-bg); backdrop-filter: blur(16px);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all .3s; box-shadow: 0 4px 24px rgba(0,0,0,.5);
+  position: relative; z-index: 2; font-size: 1.4rem;
+}
+.theme-fab:hover { transform: scale(1.1); border-color: var(--accent); box-shadow: var(--glow); }
+.theme-fab.open { transform: rotate(45deg); }
+
+.theme-menu {
+  position: absolute; bottom: 68px; right: 0;
+  display: flex; flex-direction: column; gap: .6rem;
+  opacity: 0; pointer-events: none;
+  transform: translateY(10px) scale(.95);
+  transition: all .32s cubic-bezier(.175,.885,.32,1.275);
+}
+.theme-menu.open { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+.theme-option {
+  display: flex; align-items: center; gap: .75rem;
+  background: rgba(10,10,20,.9); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: .65rem 1.1rem; cursor: pointer;
+  white-space: nowrap; transition: all .22s; border-radius: 4px;
+}
+.theme-option:hover { background: rgba(255,255,255,.08); transform: translateX(-3px); }
+.theme-option.active { border-color: rgba(255,255,255,.28); }
+.theme-swatch { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.theme-opt-name { font-family: 'Josefin Sans', sans-serif; font-size: .85rem; letter-spacing: .08em; color: rgba(255,255,255,.65); }
+
+/* ── SECTION ALT BG ── */
+.section-alt { background: var(--section-alt); }
+
+/* ── INTERACTIVE THEME ELEMENTS ── */
+
+/* Ocean — sonar ripple on hover */
+.ocean-ripple {
+  position: relative;
+}
+.ocean-ripple::after {
+  content: ''; position: absolute; inset: -4px; border-radius: inherit;
+  border: 2px solid var(--accent); opacity: 0;
+  animation: rippleOut 1.5s ease-out infinite;
+}
+@keyframes rippleOut {
+  0%   { transform: scale(1);   opacity: .6; }
+  100% { transform: scale(1.12); opacity: 0; }
+}
+
+/* Space — orbit ring on stat cards */
+[data-theme="space"] .stat-card::before {
+  content: ''; position: absolute;
+  width: 140px; height: 140px; border-radius: 50%;
+  border: 1px solid rgba(168,85,247,.15);
+  top: -40px; right: -40px; pointer-events: none;
+}
+
+/* Forest — breathing border */
+[data-theme="forest"] .theme-card {
+  animation: forestBreath 4s ease-in-out infinite;
+}
+@keyframes forestBreath {
+  0%,100% { border-color: rgba(74,222,128,.2); }
+  50%     { border-color: rgba(74,222,128,.38); }
+}
+
+/* Solar — heat-line shimmer on cards */
+[data-theme="solar"] .project-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-bright), transparent);
+  animation: scanLine 2.5s linear infinite;
+}
+
+/* ── FOOTER ── */
+.site-footer { border-top: 1px solid var(--border-card); transition: border-color .9s; }
+
+/* ── TRANSITIONS ── */
+.theme-t { transition: background .9s, border-color .9s, color .7s, box-shadow .9s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+  h2 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .theme-switcher { bottom: 1.25rem; right: 1.25rem; }
+}
