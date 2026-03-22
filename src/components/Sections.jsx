@@ -142,7 +142,7 @@ const experiences = [
   {
     company: "Chubb",
     position: "Software Engineer",
-    duration: "Aug 2025 - Present",
+    duration: "Jan 2025 - Present",
     location: "Hyderabad, India",
     type: "Full-Time",
     description:
