@@ -90,7 +90,7 @@ const About = () => {
                 style={{ background: "var(--bg-secondary)" }}
               >
                 <img
-                  src="../../profile.jpg"
+                  src="public/profile.jpg"
                   alt="Nithish Kumar Sirigadde"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
